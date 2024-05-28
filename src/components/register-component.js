@@ -23,17 +23,30 @@ const RegisterComponent = () => {
     setRole(e.target.value);
   };
 
-  const handelRegister = () => {
-    AuthService.register(username, email, password, role) //auth.service.js裡register method。
+  const handleRegister = (e) => {
+    const passwordPattern =
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[-_@$!%*?&])[A-Za-z\d-_@$!%*?&]{6,20}$/;
+    // 重置错误信息
+    setMessage("");
+    if (!passwordPattern.test(password)) {
+      setMessage("密碼須包含英文字母、數字、及一個特殊符號");
+      return;
+    }
+
+    if (role !== "student" && role !== "instructor") {
+      setMessage("身份只能是student或instructor");
+      return;
+    }
+
+    AuthService.register(username, email, password, role)
       .then(() => {
-        alert("註冊成功，你現在將被導入到登入頁面");
-        navigate("/login"); //重新導向
+        window.alert("註冊成功，您即將被導向到登入頁面");
+        navigate("/login");
       })
       .catch((e) => {
-        setMessage(e.response.data); //透過useState紀錄錯誤訊息
+        setMessage(e.response.data);
       });
   };
-
   return (
     <div style={{ padding: "3rem" }} className="col-md-12">
       <div>
@@ -81,7 +94,7 @@ const RegisterComponent = () => {
           />
         </div>
         <br />
-        <button className="btn btn-primary" onClick={handelRegister}>
+        <button className="btn btn-primary" onClick={handleRegister}>
           <span>註冊會員</span>
         </button>
       </div>

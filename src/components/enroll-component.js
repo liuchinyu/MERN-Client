@@ -6,6 +6,7 @@ const EnrollComponent = ({ currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
   let [searchInput, setSearchInput] = useState("");
   let [searchResult, setSearchResult] = useState(null); //等待數據的情況下使用null較合適
+  let [message, setMessage] = useState("");
 
   const handleTakeToLogin = () => {
     navigate("/login");
@@ -14,6 +15,9 @@ const EnrollComponent = ({ currentUser, setCurrentUser }) => {
     setSearchInput(e.target.value);
   };
   const handelSearch = () => {
+    if (message) {
+      setMessage(""); //每次輸入都將錯誤資料清空
+    }
     CourseService.getCourseByName(searchInput)
       .then((data) => {
         setSearchResult(data.data);
@@ -25,10 +29,14 @@ const EnrollComponent = ({ currentUser, setCurrentUser }) => {
 
   const handleEnroll = (e) => {
     // console.log(e.target._id);
-    CourseService.enroll(e.target.id).then(() => {
-      window.alert("課程註冊成功!重新導向到課程頁面");
-      navigate("/course");
-    });
+    CourseService.enroll(e.target.id)
+      .then(() => {
+        window.alert("課程註冊成功!重新導向到課程頁面");
+        navigate("/course");
+      })
+      .catch((e) => {
+        setMessage(e.response.data);
+      });
   };
 
   return (
@@ -61,6 +69,7 @@ const EnrollComponent = ({ currentUser, setCurrentUser }) => {
           </button>
         </div>
       )}
+      {message && <div className="alert alert-danger">{message}</div>}
       {currentUser && searchResult && searchResult.length != 0 && (
         <div>
           <p>這是我們從API取回的數據:</p>

@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_URL = "https://mern-server-y7sc.onrender.com/api/courses";
+// const API_URL = "https://mern-server-y7sc.onrender.com/api/courses";
+const API_URL = "http://localhost:8080/api/courses";
 
 class CourseService {
   post(title, description, price) {
@@ -41,6 +42,20 @@ class CourseService {
       token = "";
     }
     return axios.get(API_URL + "/instructor/" + _id, {
+      headers: { Authorization: token },
+    });
+  }
+  //透過課程ID查詢該堂修課學生
+  getStudentByCourse(_id) {
+    console.log("test11");
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+
+    return axios.get(API_URL + "/foundStudent/" + _id, {
       headers: { Authorization: token },
     });
   }

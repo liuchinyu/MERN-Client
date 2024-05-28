@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CourseService from "../services/course.service";
+import StudentComponent from "./student-component";
 
 const CourseComponent = ({ currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
   const handelTakeToLogin = () => {
     navigate("/login");
+  };
+
+  const handleStudentsFound = async (e) => {
+    let result = await CourseService.getStudentByCourse(e.target.id);
+    navigate("/StudentComponent", { state: { data: result.data + "," } }); //透過state搭配navigate傳遞資料
   };
 
   const [courseData, setCourseData] = useState(null);
@@ -26,7 +32,6 @@ const CourseComponent = ({ currentUser, setCurrentUser }) => {
       } else if (currentUser.user.role == "student") {
         CourseService.getEnrollCourses(_id)
           .then((data) => {
-            console.log(data);
             setCourseData(data.data);
           })
           .catch((e) => {
@@ -75,6 +80,19 @@ const CourseComponent = ({ currentUser, setCurrentUser }) => {
                   <p style={{ margin: "0.5rem 0rem" }}>
                     課程價格:{course.price}
                   </p>
+                  <p style={{ margin: "0.5rem 0rem" }}>
+                    課程講師:{course.instructor.username}
+                  </p>
+                  {currentUser && currentUser.user.role == "instructor" && (
+                    <a
+                      href="#"
+                      id={course._id}
+                      className="card-text btn btn-primary"
+                      onClick={handleStudentsFound}
+                    >
+                      查詢修課學生
+                    </a>
+                  )}
                 </div>
               </div>
             );

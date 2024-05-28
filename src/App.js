@@ -9,6 +9,7 @@ import ProfileComponent from "./components/profile-component";
 import CourseComponent from "./components/course-component";
 import PostCourseComponent from "./components/postCourse-component";
 import EnrollComponent from "./components/enroll-component";
+import StudentComponent from "./components/student-component";
 
 function App() {
   let [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser()); //將currentUser直接預設為當前的User
@@ -68,6 +69,7 @@ function App() {
               />
             }
           ></Route>
+          <Route path="StudentComponent" element={<StudentComponent />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
