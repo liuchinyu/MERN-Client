@@ -79,7 +79,7 @@ const RegisterComponent = () => {
             onChange={handelPassword}
             className="form-control"
             name="password"
-            placeholder="長度至少超過6個英文或數字"
+            placeholder="長度至少超過6個英文數字及包含一個特殊符號"
           />
         </div>
         <br />

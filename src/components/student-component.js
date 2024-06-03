@@ -8,7 +8,6 @@ const StudentComponent = () => {
   let result = newData.split(",");
   return (
     <div>
-      {" "}
       <h1>Student Data</h1>
       <table>
         <tr>
