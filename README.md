@@ -1,71 +1,20 @@
 網站:https://mern-client-lmej.onrender.com/
-# Getting Started with Create React App
+# 課程管理系統
+允許使用者創建學生和講師身分:允許教師創建、發佈課程；學生可以報名課程，查看課程訊息。
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+-前後端分離。
 
-## Available Scripts
+-前端使用React.js開發，透過axios串接RESTful API。
 
-In the project directory, you can run:
+-後端使用Node.js和Express建構伺服器，設計並實現RESTful API來處理學生、講師、課程的增刪查改操作。
 
-### `npm start`
+-針對課程和使用者的路由進行模組化設計：通過將不同功能的路由分離到獨立的模組中，提升代碼的可維護性和可讀性。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-設計和實現不同角色（學生和講師）的授權邏輯，確保只有授權的用戶可以執行特定操作。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-使用MongoDB作為資料庫系統，設計Schema驗證使用者及課程的數據模型，利用Mongoose作為ODM工具進行資料庫操作。
 
-### `npm test`
+-實作JWT驗證機制，透過用戶的身份驗證和授權，才能訪問受保護的資源。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-使用cors處理跨域請求，確保數據的完整性。
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
