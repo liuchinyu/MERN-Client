@@ -5,8 +5,16 @@ import CourseService from "../services/course.service";
 const EnrollComponent = ({ currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
   let [searchInput, setSearchInput] = useState("");
-  let [searchResult, setSearchResult] = useState(null); //等待數據的情況下使用null較合適
+  let [searchResult, setSearchResult] = useState(""); //等待數據的情況下使用null較合適
   let [message, setMessage] = useState("");
+  let [serch, setSerch] = useState(false); //判斷是否有搜尋過
+
+  useEffect(() => {
+    //透過useEffect監控searchResult跟serch
+    if (serch && searchResult && searchResult.length === 0) {
+      setMessage("查無此課程");
+    }
+  }, [serch, searchResult]);
 
   const handleTakeToLogin = () => {
     navigate("/login");
@@ -15,9 +23,11 @@ const EnrollComponent = ({ currentUser, setCurrentUser }) => {
     setSearchInput(e.target.value);
   };
   const handelSearch = () => {
+    setSerch(true);
     if (message) {
       setMessage(""); //每次輸入都將錯誤資料清空
     }
+
     CourseService.getCourseByName(searchInput)
       .then((data) => {
         setSearchResult(data.data);
@@ -70,6 +80,8 @@ const EnrollComponent = ({ currentUser, setCurrentUser }) => {
         </div>
       )}
       {message && <div className="alert alert-danger">{message}</div>}
+      {console.log("earchResult.length.", searchResult.length)}
+
       {currentUser && searchResult && searchResult.length != 0 && (
         <div>
           <p>這是我們從API取回的數據:</p>
