@@ -5,6 +5,7 @@ import StudentComponent from "./student-component";
 
 const CourseComponent = ({ currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
+
   const handelTakeToLogin = () => {
     navigate("/login");
   };
@@ -40,7 +41,7 @@ const CourseComponent = ({ currentUser, setCurrentUser }) => {
       }
     }
   }, []); //空陣列表一進入此route就執行function
-
+  console.log("currentUser", currentUser);
   return (
     <div style={{ padding: "3rem" }}>
       {!currentUser && (
@@ -54,12 +55,12 @@ const CourseComponent = ({ currentUser, setCurrentUser }) => {
           </button>
         </div>
       )}
-      {currentUser.user.role == "student" && (
+      {currentUser && currentUser.user.role == "student" && (
         <div>
           <h1>歡迎來到學生課程頁面</h1>
         </div>
       )}
-      {currentUser.user.role == "instructor" && (
+      {currentUser && currentUser.user.role == "instructor" && (
         <div>
           <h1>歡迎來到講師的課程頁面</h1>
         </div>
